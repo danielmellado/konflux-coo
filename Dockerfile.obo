@@ -19,7 +19,8 @@ RUN OC_PATH=$(which oc); \
 FROM registry.redhat.io/ubi8/ubi-minimal:8.10-1130
 WORKDIR /
 
-RUN microdnf install -y rsync tar xz
+# skip, only needed for must gather
+# RUN microdnf install -y rsync tar xz
 
 COPY --from=origincli /tmp/oc /usr/bin/oc
 
