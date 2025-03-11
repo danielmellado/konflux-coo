@@ -12,6 +12,7 @@ metadata:
               (".tekton/.tekton/perses-0-50-1-1-pull-request.yaml".pathChanged() ||
               ".tekton/.tekton/perses-0-50-1-1-push.yaml".pathChanged() ||
               "Dockerfile.perses".pathChanged() ||
+              "rpms.lock.yaml".pathChanged() ||
               "perses".pathChanged())
     build.appstudio.openshift.io/build-nudge-files: bundle-patches/render_templates
   creationTimestamp: null
@@ -42,7 +43,9 @@ spec:
     - name: hermetic
       value: "true"
     - name: prefetch-input
-      value: '[{"type": "gomod", "path": "./perses"}, {"type": "npm", "path":"./perses/ui"}]'
+      value: '[{"type": "gomod", "path": "./perses"}, {"type":  "rpm"}]'
+    - name: prefetch-dev-package-managers-enabled
+      value: "true"
     - name: build-source-image
       value: "true"
   pipelineSpec:
@@ -95,6 +98,10 @@ spec:
       - default: "false"
         description: Execute the build with network isolation
         name: hermetic
+        type: string
+      - default: "false"
+        description: Enable dev-package-managers in prefetch task
+        name: prefetch-dev-package-managers-enabled
         type: string
       - default: ""
         description: Build dependencies to be prefetched by Cachi2
@@ -194,6 +201,8 @@ spec:
             value: $(params.output-image).prefetch
           - name: ociArtifactExpiresAfter
             value: $(params.image-expires-after)
+          - name: dev-package-managers
+            value: $(params.prefetch-dev-package-managers-enabled)
         runAfter:
           - clone-repository
         taskRef:
