@@ -13,6 +13,7 @@ metadata:
               (".tekton/.tekton/perses-operator-0-1-1-1-pull-request.yaml".pathChanged() ||
               ".tekton/.tekton/perses-operator-0-1-1-1-push.yaml".pathChanged() ||
               "Dockerfile.perses-operator".pathChanged() ||
+              "rpms.lock.yaml".pathChanged() ||
               "perses-operator".pathChanged())
     build.appstudio.openshift.io/build-nudge-files: bundle-patches/render_templates
   creationTimestamp: null
@@ -42,8 +43,12 @@ spec:
       value: Dockerfile.perses-operator
     - name: path-context
       value: .
+    - name: hermetic
+      value: "true"
     - name: prefetch-input
-      value: '[{"type": "gomod", "path": "./perses-operator"}]'
+      value: '[{"type": "gomod", "path": "./perses-operator"}, {"type":  "rpm"}]'
+    - name: prefetch-dev-package-managers-enabled
+      value: "true"
     - name: build-source-image
       value: "true"
   pipelineSpec:
@@ -96,6 +101,10 @@ spec:
       - default: "false"
         description: Execute the build with network isolation
         name: hermetic
+        type: string
+      - default: "false"
+        description: Enable dev-package-managers in prefetch task
+        name: prefetch-dev-package-managers-enabled
         type: string
       - default: ""
         description: Build dependencies to be prefetched by Cachi2
@@ -195,6 +204,8 @@ spec:
             value: $(params.output-image).prefetch
           - name: ociArtifactExpiresAfter
             value: $(params.image-expires-after)
+          - name: dev-package-managers
+            value: $(params.prefetch-dev-package-managers-enabled)
         runAfter:
           - clone-repository
         taskRef:
@@ -593,7 +604,7 @@ spec:
             - name: name
               value: rpms-signature-scan
             - name: bundle
-              value: quay.io/konflux-ci/tekton-catalog/task-rpms-signature-scan@sha256:b9cb1e126d186010e0a5281501b475177d55b4eb2829c5e7d7614c173a8c929c
+              value: quay.io/konflux-ci/tekton-catalog/task-rpms-signature-scan:0.2@sha256:b9cb1e126d186010e0a5281501b475177d55b4eb2829c5e7d7614c173a8c929c
             - name: kind
               value: task
           resolver: bundles

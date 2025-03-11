@@ -2,7 +2,9 @@ FROM brew.registry.redhat.io/rh-osbs/openshift-golang-builder:rhel_8_golang_1.23
 
 USER root
 
-RUN dnf install -y mailcap && dnf clean all && rm -rf /var/cache/dnf
+RUN dnf install -y --setopt=tsflags=nodocs mailcap && \
+    dnf clean all && \
+    rm -rf /var/cache/dnf
 
 WORKDIR /app
 
