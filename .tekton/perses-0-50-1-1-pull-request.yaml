@@ -46,7 +46,7 @@ spec:
     - name: hermetic
       value: "true"
     - name: prefetch-input
-      value: '[{"type": "gomod", "path": "./perses"}, {"type": "npm", "path":"./perses/ui"}, {"type":  "rpm"}]'
+      value: '[{"type": "gomod", "path": "./perses"}, {"type":  "rpm"}]'
     - name: prefetch-dev-package-managers-enabled
       value: "true"
     - name: build-source-image
