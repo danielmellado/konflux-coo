@@ -5,44 +5,68 @@ arches:
 - arch: aarch64
   packages:
   - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi8/8/aarch64/baseos/os/Packages/m/mailcap-2.1.48-3.el8.noarch.rpm
-    repoid: ubi-8-baseos-rpms
+    repoid: ubi-8-for-aarch64-baseos-rpms
     size: 39708
     checksum: sha256:b2d5f3c4e187dc8c6f94b551fc021925188ab7675e02a317111aa0b49965f03e
     name: mailcap
     evr: 2.1.48-3.el8
     sourcerpm: mailcap-2.1.48-3.el8.src.rpm
-  source: []
+  source:
+  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi8/8/aarch64/baseos/source/SRPMS/Packages/m/mailcap-2.1.48-3.el8.src.rpm
+    repoid: ubi-8-for-aarch64-baseos-source-rpms
+    size: 41545
+    checksum: sha256:69f964011d33e14100bf07212c9268ba5b61f2237c5bd6da1498b43c3789d91c
+    name: mailcap
+    evr: 2.1.48-3.el8
   module_metadata: []
 - arch: ppc64le
   packages:
   - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi8/8/ppc64le/baseos/os/Packages/m/mailcap-2.1.48-3.el8.noarch.rpm
-    repoid: ubi-8-baseos-rpms
+    repoid: ubi-8-for-ppc64le-baseos-rpms
     size: 39708
     checksum: sha256:b2d5f3c4e187dc8c6f94b551fc021925188ab7675e02a317111aa0b49965f03e
     name: mailcap
     evr: 2.1.48-3.el8
     sourcerpm: mailcap-2.1.48-3.el8.src.rpm
-  source: []
+  source:
+  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi8/8/ppc64le/baseos/source/SRPMS/Packages/m/mailcap-2.1.48-3.el8.src.rpm
+    repoid: ubi-8-for-ppc64le-baseos-source-rpms
+    size: 41545
+    checksum: sha256:69f964011d33e14100bf07212c9268ba5b61f2237c5bd6da1498b43c3789d91c
+    name: mailcap
+    evr: 2.1.48-3.el8
   module_metadata: []
 - arch: s390x
   packages:
   - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi8/8/s390x/baseos/os/Packages/m/mailcap-2.1.48-3.el8.noarch.rpm
-    repoid: ubi-8-baseos-rpms
+    repoid: ubi-8-for-s390x-baseos-rpms
     size: 39708
     checksum: sha256:b2d5f3c4e187dc8c6f94b551fc021925188ab7675e02a317111aa0b49965f03e
     name: mailcap
     evr: 2.1.48-3.el8
     sourcerpm: mailcap-2.1.48-3.el8.src.rpm
-  source: []
+  source:
+  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi8/8/s390x/baseos/source/SRPMS/Packages/m/mailcap-2.1.48-3.el8.src.rpm
+    repoid: ubi-8-for-s390x-baseos-source-rpms
+    size: 41545
+    checksum: sha256:69f964011d33e14100bf07212c9268ba5b61f2237c5bd6da1498b43c3789d91c
+    name: mailcap
+    evr: 2.1.48-3.el8
   module_metadata: []
 - arch: x86_64
   packages:
   - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi8/8/x86_64/baseos/os/Packages/m/mailcap-2.1.48-3.el8.noarch.rpm
-    repoid: ubi-8-baseos-rpms
+    repoid: ubi-8-for-x86_64-baseos-rpms
     size: 39708
     checksum: sha256:b2d5f3c4e187dc8c6f94b551fc021925188ab7675e02a317111aa0b49965f03e
     name: mailcap
     evr: 2.1.48-3.el8
     sourcerpm: mailcap-2.1.48-3.el8.src.rpm
-  source: []
+  source:
+  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi8/8/x86_64/baseos/source/SRPMS/Packages/m/mailcap-2.1.48-3.el8.src.rpm
+    repoid: ubi-8-for-x86_64-baseos-source-rpms
+    size: 41545
+    checksum: sha256:69f964011d33e14100bf07212c9268ba5b61f2237c5bd6da1498b43c3789d91c
+    name: mailcap
+    evr: 2.1.48-3.el8
   module_metadata: []
