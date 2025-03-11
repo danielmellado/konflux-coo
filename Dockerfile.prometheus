@@ -21,6 +21,7 @@ ENV CGO_ENABLED=0
 ENV SKIP_UI_BUILD=true
 # Build prometheus directly using Go
 RUN GOOS=$TARGETOS GOARCH=$TARGETARCH go build $GOFLAGS -o ./prometheus ./cmd/prometheus
+RUN GOOS=$TARGETOS GOARCH=$TARGETARCH go build $GOFLAGS -o ./promtool ./cmd/promtool
 
 FROM registry.redhat.io/rhel9-4-els/rhel:9.4
 
