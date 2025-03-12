@@ -193,9 +193,6 @@ VALUE="${COO_CLUSTER_HEALTH_ANALYZER_IMAGE_URL}" yq -i '(.spec.install.spec.depl
 yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").args) +=  ["--images=perses=$(RELATED_IMAGE_PERSES)"]' "$csv_file"
 VALUE="${COO_PERSES_IMAGE_URL}" yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").env) += [{"name":"RELATED_IMAGE_PERSES", "value": strenv(VALUE)}]' "$csv_file"
 
-yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").args) +=  ["--images=perses-operator=$(RELATED_IMAGE_PERSES_OPERATOR)"]' "$csv_file"
-VALUE="${COO_PERSES_OPERATOR_IMAGE_URL}" yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").env) += [{"name":"RELATED_IMAGE_PERSES_OPERATOR", "value": strenv(VALUE)}]' "$csv_file"
-
 # set openshift.enabled feature gate
 yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").args) += ["--openshift.enabled=true"]' "$csv_file"
 
