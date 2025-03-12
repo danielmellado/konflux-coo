@@ -34,6 +34,9 @@ spec:
     value: .
   - name: build-source-image
     value: "true"
+  - name: build-args
+    value:
+      - REGISTRY=registry.redhat.io
   pipelineSpec:
     description: |
       This pipeline is ideal for building container images from a Containerfile while reducing network traffic.
