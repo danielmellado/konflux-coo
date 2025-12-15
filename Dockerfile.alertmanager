@@ -20,7 +20,7 @@ ENV NO_DOCKER=true
 RUN GOOS=$TARGETOS GOARCH=$TARGETARCH go build $GOFLAGS -o alertmanager github.com/prometheus/alertmanager/cmd/alertmanager
 RUN GOOS=$TARGETOS GOARCH=$TARGETARCH go build $GOFLAGS -o amtool github.com/prometheus/alertmanager/cmd/amtool
 
-FROM registry.redhat.io/ubi9/ubi-minimal:latest@sha256:34880b64c07f28f64d95737f82f891516de9a3b43583f39970f7bf8e4cfa48b7
+FROM registry.redhat.io/ubi9/ubi-minimal:latest@sha256:6fc28bcb6776e387d7a35a2056d9d2b985dc4e26031e98a2bd35a7137cd6fd71
 
 COPY --from=builder workspace/amtool       /bin/amtool
 COPY --from=builder workspace/alertmanager /bin/alertmanager
@@ -38,9 +38,14 @@ ENTRYPOINT [ "/bin/alertmanager" ]
 CMD        [ "--config.file=/etc/alertmanager/alertmanager.yml", \
              "--storage.path=/alertmanager" ]
 
-LABEL com.redhat.component="coo-alertmanager" \
+ARG VERSION=v0.28.1 
+LABEL com.redhat.component="coo-alertmanager" \           
       name="Alertmanager" \
-      version="v0.28.1" \
+      version="${VERSION}" \
+      release="${VERSION}" \
+      vendor="Red Hat, Inc." \
+      distribution-scope="public" \
+      url="https://github.com/prometheus/alertmanager" \
       summary="Alertmanager for Cluster Observability Operator" \
       io.openshift.tags="openshift,monitoring" \
       io.k8s.display-name="Alertmanager" \

@@ -1,5 +1,5 @@
 # Builder
-FROM registry.redhat.io/ubi9/ubi-minimal@sha256:34880b64c07f28f64d95737f82f891516de9a3b43583f39970f7bf8e4cfa48b7 as builder
+FROM registry.redhat.io/ubi9/ubi-minimal@sha256:6fc28bcb6776e387d7a35a2056d9d2b985dc4e26031e98a2bd35a7137cd6fd71 as builder
 
 USER root
 
@@ -13,7 +13,7 @@ COPY /observability-operator/LICENSE LICENSE
 COPY /bundle-patches/render_templates .
 
 # Get yq from konflux CI
-FROM quay.io/konflux-ci/yq@sha256:5c4d54c7aa36f58df7fa7f3404464953b4a15aa95ec6455d74eb58207fd0c06b AS parser
+FROM quay.io/konflux-ci/yq@sha256:d007048d29fc22f9a81524173eeb9131b5b78253a4ab18f6331400c88d78ea47 AS parser
 
 # Run template rendering
 FROM builder as final
@@ -51,23 +51,23 @@ LABEL operators.operatorframework.io.metrics.project_layout=unknown
 LABEL operators.operatorframework.io.test.mediatype.v1=scorecard+v1
 LABEL operators.operatorframework.io.test.config.v1=tests/scorecard/
 
+ARG VERSION=v1.3.1
 LABEL com.redhat.component="coo-bundle" \
       name="cluster-observability-operator-bundle" \
-      release="v1.3.0" \
-      version="v1.3.0" \
-      com.redhat.openshift.versions="v4.12" \
+      version="${VERSION}" \
+      release="${VERSION}" \
+      vendor="Red Hat, Inc." \
       distribution-scope="public" \
+      url="https://github.com/rhobs/observability-operator" \
       summary="Cluster Observability Operator Bundle" \
+      com.redhat.openshift.versions="v4.12" \
       io.openshift.tags="openshift,observability,monitoring" \
       io.k8s.display-name="Cluster Observability Operator Bundle" \
-      maintainer="OpenShift Monitoring team <team-monitoring-incluster@redhat.com>" \
-      description="Cluster Observability Operator Bundle" \
       io.k8s.description="Cluster Observability Operator Bundle" \
-      url="https://github.com/rhobs/observability-operator"\
-      vendor="Red Hat, Inc."
+      maintainer="OpenShift Monitoring team <team-monitoring-incluster@redhat.com>" \
+      description="Cluster Observability Operator Bundle"
 
 COPY --from=final /workspace/bundle/manifests /manifests/
 COPY --from=final /workspace/bundle/metadata /metadata/
 COPY --from=final /workspace/bundle/tests/scorecard /tests/scorecard/
 COPY --from=final /workspace/LICENSE /licenses/.
-
