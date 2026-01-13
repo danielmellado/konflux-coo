@@ -17,7 +17,7 @@ ENV GOFLAGS=-mod=readonly
 ENV GOEXPERIMENT=strictfipsruntime
 RUN go build -tags strictfipsruntime -o /bin/cluster-health-analyzer
 
-FROM registry.redhat.io/ubi9/ubi-minimal:latest@sha256:34880b64c07f28f64d95737f82f891516de9a3b43583f39970f7bf8e4cfa48b7
+FROM registry.redhat.io/ubi9/ubi-minimal:latest@sha256:6fc28bcb6776e387d7a35a2056d9d2b985dc4e26031e98a2bd35a7137cd6fd71
 
 WORKDIR /
 COPY --from=builder /bin/cluster-health-analyzer /bin/cluster-health-analyzer
@@ -25,9 +25,14 @@ USER 65532:65532
 
 ENTRYPOINT ["/bin/cluster-health-analyzer"]
 
+ARG VERSION=v1.0.0
 LABEL com.redhat.component="coo-cluster-health-analyzer" \
       name="openshift/cluster-health-analyzer" \
-      version="v1.0.0" \
+      version="${VERSION}" \
+      release="${VERSION}" \
+      vendor="Red Hat, Inc." \
+      distribution-scope="public" \
+      url="https://github.com/openshift/cluster-health-analyzer" \
       summary="OpenShift Cluster Health Analyzer" \
       io.openshift.tags="openshift,observability,metrics,alerts,incidents" \
       io.k8s.display-name="COO Cluster Health Analyzer" \

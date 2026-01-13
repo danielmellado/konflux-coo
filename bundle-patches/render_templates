@@ -4,10 +4,10 @@ set -ex
 
 csv_file="$1"
 annotation_file="$2"
-PRODUCT_VERSION="1.3.0"
+PRODUCT_VERSION="1.3.1"
 X_VERSION="1"
 Y_VERSION="3"
-Z_VERSION="0"
+Z_VERSION="1"
 CSV_REPLACES_VERSION="1.3.0"
 
 if [[ -z "$REGISTRY" ]]; then
@@ -36,45 +36,45 @@ yq -i '.metadata.labels += {"operatorframework.io/arch.s390x": "supported"}' "$c
 
 # Konflux Build Pipeline should automatically create PRs to update the SHA images but no always
 # Use 'update-component-images.sh' to update the render_templates file with the latest SHA images
-COO_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/cluster-observability-rhel9-operator@sha256:aae060eb1729f0f26c27182a5ab892fd0a55d5a531a9fdb3d4888440444baf67"
+COO_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/cluster-observability-rhel9-operator@sha256:c2d2f054ee82e0f0224c7b44c7e589c1c65a5042d38e6ffc02f60077e7bb9a25"
 
-COO_CONF_RELOADER_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/obo-prometheus-operator-prometheus-config-reloader-rhel9@sha256:e39f44d889d9a8f9a1d6923ea8deacc00bb615d9e48fba809414db53a3d5c172"
+COO_CONF_RELOADER_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/obo-prometheus-operator-prometheus-config-reloader-rhel9@sha256:25acaea7ca8a5d8b472b3de0431398c050d3cac0f29a0edb48e65a24a5db0bc7"
 
-COO_ALERTMANAGER_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/alertmanager-rhel9@sha256:105fcc161cf3982779d6a7f2f66253955f236f1cc72cc15390c67e16689240f3"
+COO_ALERTMANAGER_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/alertmanager-rhel9@sha256:bfb9a918ce83bcf92f746fed6fc0e8034598835a68a2b990682e8a1ab731f007"
 
-COO_PROMETHEUS_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/prometheus-rhel9@sha256:462517e82bff78b30dbc571bdd0467079040572a516a72e0dc607ad3cecae336"
+COO_PROMETHEUS_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/prometheus-rhel9@sha256:7fcc37f868447fef05e90c69e834dd180205fdabdf7c76aa6a5d5b6e7a4f4a34"
 
-COO_THANOS_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/thanos-rhel9@sha256:734c35a032e77313c7eacd3f4ae224a15040edc56cb493e0f6f90a73ae0b2fe9"
+COO_THANOS_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/thanos-rhel9@sha256:3f93cf2406e21448e49e27c5e6672dd2c345a5677dc478576f20b8c42266a079"
 
-COO_ADMISSION_WEBHOOK_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/obo-prometheus-operator-admission-webhook-rhel9@sha256:0a924d9b4156a826a2b4f54483414be444bce7ade3026474ddc8cf230fc103b4"
+COO_ADMISSION_WEBHOOK_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/obo-prometheus-operator-admission-webhook-rhel9@sha256:6f684f5ef37a17a85dc6bc2eef949cc17862cb9ce8fc727bc5f13076e54e0b6e"
 
-COO_PO_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/obo-prometheus-rhel9-operator@sha256:fa637afe1636c6aad47cf46f0cb9133908060e095ff02492a94e1e471d91b43e"
+COO_PO_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/obo-prometheus-rhel9-operator@sha256:cedd6568f9196877183a829a901a28180a2fac5bcb5f21802386c567eda506a4"
 
-COO_CONSOLE_DASHBOARDS_PLUGIN_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/dashboards-console-plugin-rhel9@sha256:037095b88a7ee8b97d38709d6f487b7774b630806a09f22adcdd0e8f5e727596"
+COO_CONSOLE_DASHBOARDS_PLUGIN_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/dashboards-console-plugin-rhel9@sha256:ba71796966cef2028adacf135e30670811594488c545a573ecc9bbecd652f310"
 
-COO_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/distributed-tracing-console-plugin-rhel9@sha256:bd15442234c62b80406a4e372fbeca058d011f1e7af05ed1f2e5ba307287bc00"
+COO_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/distributed-tracing-console-plugin-rhel9@sha256:3d06ab02d939b4320956b5d817f38ac8b50e6474d9c2605d106d27b46f5bcb37"
 
-COO_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_PF5_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/distributed-tracing-console-plugin-pf5-rhel9@sha256:9ea842ce24e665bd83ce1335e80c018e416a1567a06644e358f2c0207a972e90"
+COO_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_PF5_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/distributed-tracing-console-plugin-pf5-rhel9@sha256:54856eedba94bc9f0ba63aaeab51b995a5ba0d28fe8b8cc61d0857e19625e877"
 
-COO_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_PF4_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/distributed-tracing-console-plugin-pf4-rhel9@sha256:0ec877b6b32242dfd0589b624acd9c02a823dc2a17aac859b675177158b37a28"
+COO_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_PF4_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/distributed-tracing-console-plugin-pf4-rhel9@sha256:322eea5748ceda260c37a668f79f77daca512edf300959062b2518140be29b3d"
 
-COO_CONSOLE_LOGGING_PLUGIN_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/logging-console-plugin-rhel9@sha256:178a75008af42340fa96ce3037b4f0c93fdc4f1c34dcb70eaa403a51cccbdbca"
+COO_CONSOLE_LOGGING_PLUGIN_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/logging-console-plugin-rhel9@sha256:2df16c75f3d3aa423dcceb1a5c0cb060abcd4b2ffb69cbdfc2bef2905f556798"
 
-COO_CONSOLE_LOGGING_PLUGIN_PF4_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/logging-console-plugin-pf4-rhel9@sha256:77c0b7419c90a401e473971aeda87e930d9167ff2c20d081e4a55e7e0d6eaddd"
+COO_CONSOLE_LOGGING_PLUGIN_PF4_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/logging-console-plugin-pf4-rhel9@sha256:f06d49573873488d682c9096b92bfbbd832b8ff8e73f7853015ddb1b8af7b359"
 
-COO_CONSOLE_TROUBLESHOOTING_PANEL_PLUGIN_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/troubleshooting-panel-console-plugin-rhel9@sha256:7dcab105f931e02d3d40373e0f119522a3da05cedbc11aadf889830cbacc0b29"
+COO_CONSOLE_TROUBLESHOOTING_PANEL_PLUGIN_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/troubleshooting-panel-console-plugin-rhel9@sha256:366181fae492330e98fdf0fa188ea959da55fbc9ce19b5aac24e5eda2034f04d"
 
-COO_CONSOLE_MONITORING_PLUGIN_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/monitoring-console-plugin-rhel9@sha256:c1fcb9ff64c817ad542116bf125657903bacda717a1b2a91897754d5c6437a95"
+COO_CONSOLE_MONITORING_PLUGIN_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/monitoring-console-plugin-rhel9@sha256:0a6adafedd8c9bb0d0ef6ca3a0275d2786894f45d0382dba0a46db377fb52a07"
 
-COO_CONSOLE_MONITORING_PLUGIN_PF5_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/monitoring-console-plugin-pf5-rhel9@sha256:8661cb2c5dfb72b2f59ed0f06cba583a63af4b9fbf4c050f089ad2bc9469ac1f"
+COO_CONSOLE_MONITORING_PLUGIN_PF5_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/monitoring-console-plugin-pf5-rhel9@sha256:4394a98fe20c78725d144481b2430dbac6bbb298dda3fdf025917e50e5ae0af5"
 
-COO_KORREL8R_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/korrel8r-rhel9@sha256:84fa0fa51ea8ef0015684b63fcac2211974422c898f14822dd175a106c84b142"
+COO_KORREL8R_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/korrel8r-rhel9@sha256:4540950bf85f9ce12fb741e6fdcfd0112d6aa4bfdac01d45a76ae07d873082f6"
 
-COO_CLUSTER_HEALTH_ANALYZER_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/cluster-health-analyzer-rhel9@sha256:bb53f6d980923dc048af03919cf7344d3bf35734af99260b5c69a2bce9177890"
+COO_CLUSTER_HEALTH_ANALYZER_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/cluster-health-analyzer-rhel9@sha256:23a2cc7c1ff7bb15fc527902ff44bbc4d9120441efa9acb640d3a14355f4bb77"
 
-COO_PERSES_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/perses-rhel9@sha256:485e4d4ae570ec75d99b8101a7ac3f328fbe269b6df551d2a7704bbe237d4a7d"
+COO_PERSES_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/perses-rhel9@sha256:df8d594036a34dd3c8c4a908a2793203c12d7da87daac3e661035e5ef72e5229"
 
-COO_PERSES_OPERATOR_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/perses-rhel9-operator@sha256:ee16ae304b9cb95920fbf6dc024939436d4e4b527eebb72a5d28ec2b7df1839a"
+COO_PERSES_OPERATOR_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/perses-rhel9-operator@sha256:292e804ebf9a3c627a13ff9ef6e5ffd566a31edd547499c96a60960e685bc4a9"
 
 if [[ $REGISTRY == "registry.redhat.io"  || $REGISTRY == "registry.stage.redhat.io" ]]; then
     COO_IMAGE_URL="$REGISTRY/${COO_IMAGE_URL:(58)}"
@@ -139,18 +139,18 @@ yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operat
 # variable. This allows OSBS to massage the pullspec (registry replacement,
 # sha pinning)
 # We do that by first using sed to replace the relevant image spec with our new
-# env var.
+# env var or add it if its not present.
 # Then we use yq to add the env var value to the containers environment.
 sed -i -e 's|--prometheus-config-reloader=.*|"--prometheus-config-reloader=$(RELATED_IMAGE_PROMETHEUS_CONFIG_RELOADER)"|' "$csv_file"
 VALUE="${COO_CONF_RELOADER_IMAGE_URL}" yq -i '(.spec.install.spec.deployments[] | select(.name == "obo-prometheus-operator").spec.template.spec.containers[] | select(.name == "prometheus-operator").env) += [{"name":"RELATED_IMAGE_PROMETHEUS_CONFIG_RELOADER", "value": strenv(VALUE)}]' "$csv_file"
 
-sed -i -e 's|--images=alertmanager=.*|"--images=alertmanager=$(RELATED_IMAGE_ALERTMANAGER)"|' "$csv_file"
+yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").args) +=  ["--images=alertmanager=$(RELATED_IMAGE_ALERTMANAGER)"]' "$csv_file"
 VALUE="${COO_ALERTMANAGER_IMAGE_URL}" yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").env) += [{"name":"RELATED_IMAGE_ALERTMANAGER", "value": strenv(VALUE)}]' "$csv_file"
 
-sed -i -e 's|--images=prometheus=.*|"--images=prometheus=$(RELATED_IMAGE_PROMETHEUS)"|' "$csv_file"
+yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").args) +=  ["--images=prometheus=$(RELATED_IMAGE_PROMETHEUS)"]' "$csv_file"
 VALUE="${COO_PROMETHEUS_IMAGE_URL}" yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").env) += [{"name":"RELATED_IMAGE_PROMETHEUS", "value": strenv(VALUE)}]' "$csv_file"
 
-sed -i -e 's|--images=thanos=.*|"--images=thanos=$(RELATED_IMAGE_THANOS)"|' "$csv_file"
+yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").args) +=  ["--images=thanos=$(RELATED_IMAGE_THANOS)"]' "$csv_file"
 VALUE="${COO_THANOS_IMAGE_URL}" yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").env) += [{"name":"RELATED_IMAGE_THANOS", "value": strenv(VALUE)}]' "$csv_file"
 
 sed -i -e 's|--images=perses=.*|"--images=perses=$(RELATED_IMAGE_PERSES)"|' "$csv_file"

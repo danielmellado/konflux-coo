@@ -37,7 +37,7 @@ ENV CGO_ENABLED=1
 
 RUN make build-backend
 
-FROM registry.redhat.io/ubi9/ubi-minimal:latest@sha256:34880b64c07f28f64d95737f82f891516de9a3b43583f39970f7bf8e4cfa48b7
+FROM registry.redhat.io/ubi9/ubi-minimal:latest@sha256:6fc28bcb6776e387d7a35a2056d9d2b985dc4e26031e98a2bd35a7137cd6fd71
 
 RUN mkdir /licenses
 COPY ui-monitoring/LICENSE /licenses/.
@@ -50,9 +50,14 @@ COPY --from=web-builder /opt/app-root/config /opt/app-root/config
 
 ENTRYPOINT ["/opt/app-root/plugin-backend", "-static-path", "/opt/app-root/web/dist"]
 
+ARG VERSION=v0.5.0
 LABEL com.redhat.component="coo-monitoring-console-plugin" \
       name="openshift/monitoring-console-plugin" \
-      version="v0.5.0" \
+      version="${VERSION}" \
+      release="${VERSION}" \
+      vendor="Red Hat, Inc." \
+      distribution-scope="public" \
+      url="https://github.com/openshift/monitoring-plugin" \
       summary="OpenShift monitoring plugin to view and explore metrics and alerts" \
       io.openshift.tags="openshift,observability-ui,metrics,alerts" \
       io.k8s.display-name="OpenShift console monitoring plugin" \
